@@ -20,13 +20,6 @@ class UserService {
             && bodyContent.hasOwnProperty('lastName') && bodyContent['lastName'] != ""
         return contentValidated;
     }
-
-    //Functions:
-    /**
-     * Create new user in the database, if the user with a username already exist, it don't create a new one.
-     * @param {*} newUserData User data received from user.
-     * @returns True if the user with username don't exist on the database, else false.
-     */
     static createNewUser(newUserData) {
 
         const newUser = new User({
