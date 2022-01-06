@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 //DB Connection
 async function ConnectionToDB() {
-    await mongoose.connect("mongodb://localhost:27017/apiDB", { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(`${config.db_dialect}://${config.db_host}:${config.db_port}/${config.db_name}`, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("DB Connection state: ", mongoose.STATES[mongoose.connection.readyState]);
 }
 ConnectionToDB().catch(err => console.log(err));
