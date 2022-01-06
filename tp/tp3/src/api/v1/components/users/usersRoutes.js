@@ -3,19 +3,21 @@ const userController = require('./usersController');
 const router = express.Router();
 
 
-router.route('/userlist').get([
+router.route('/user')
+.get([
     userController.userList
 ])
-router.route('/getUser').get([
-    userController.getUser
-])
-router.route('/createUser').post([
+.post([
     userController.createUser
 ])
-router.route('/updateUser').put([
+
+router.route('/user/:id').get([
+    userController.getUser
+])
+.put([
     userController.updateUser
 ])
-router.route('/deleteUser').delete([
+.delete([
     userController.deleteUser
 ])
 

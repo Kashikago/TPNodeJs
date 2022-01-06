@@ -7,9 +7,9 @@ exports.userList = (req, res) => {
     
 };
 exports.getUser = (req, res) => {
-    const query = req.query;
-    if (query.hasOwnProperty('id') && query['id']) {
-        UserService.getUserById(query['id'])
+    const params = req.params;
+    if (params.hasOwnProperty('id') && params['id']) {
+        UserService.getUserById(params['id'])
             .then(result => {
                 if(result != null)
                 {
@@ -36,10 +36,10 @@ exports.createUser = (req, res) => {
 
 };
 exports.updateUser = (req, res) => {
-    const query = req.query;
+    const params = req.params;
     const body = req.body;
-    if (query.hasOwnProperty('id') && query['id']) {
-        UserService.updateUserById(query['id'],body).then(result=>{
+    if (params.hasOwnProperty('id') && params['id']) {
+        UserService.updateUserById(params['id'],body).then(result=>{
             console.log(result);
             if(result)
             res.sendStatus(200);
@@ -53,9 +53,9 @@ exports.updateUser = (req, res) => {
     }
 };
 exports.deleteUser = (req, res) => {
-    const query = req.query;
-    if (query.hasOwnProperty('id') && query['id']) {
-        UserService.deleteUserById(query['id']).then(result=>{
+    const params = req.params;
+    if (params.hasOwnProperty('id') && params['id']) {
+        UserService.deleteUserById(params['id']).then(result=>{
             if(result != null)
             res.sendStatus(200);
             else
