@@ -1,18 +1,6 @@
-const mongoose = require('mongoose');
-
-//Scheme and model
-const userSchema = new mongoose.Schema({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    phone: "",
-    creationDate: "",
-    role: "",
-});
-const User = mongoose.model('user', userSchema);
-
+const  User = require("../users/Models/userModel");
 class UserService {
+ 
     static userDataValidator(bodyContent) {
         let contentValidated =
             bodyContent.hasOwnProperty('email') && bodyContent['email'] != ""
@@ -26,15 +14,17 @@ class UserService {
             firstName: newUserData.firstName,
             lastName: newUserData.lastName,
             email: newUserData.email,
-            password: newUserData.password,
+            password:"",
             phone: newUserData.phone,
-            creationDate: new Date().toISOString(),
             role: newUserData.role,
         });
         console.log(newUser);
         const promise = new Promise((resolve) => {
             newUser.save();
             resolve(true);
+        }).catch(err=>{
+            console.log(err);
+            resolve(false);
         })
         return promise;
     }

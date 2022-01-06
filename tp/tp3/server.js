@@ -4,14 +4,13 @@ const express = require("express");
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const db = require('./db');
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./src/swagger.json');
 
-//DB Connection
-async function ConnectionToDB() {
-    await mongoose.connect(`${config.db_dialect}://${config.db_host}:${config.db_port}/${config.db_name}`, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log("DB Connection state: ", mongoose.STATES[mongoose.connection.readyState]);
-}
-ConnectionToDB().catch(err => console.log(err));
+//Swagger setup:
+app.use('/api-docs',swaggerUi.serve);
+app.get('/api-docs',swaggerUi.setup(swaggerDocument));
 
 //Header
 app.use((req,res,next)=>{
