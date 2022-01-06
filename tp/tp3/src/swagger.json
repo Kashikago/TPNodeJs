@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TP3: CRUD and Swagger",
+    "description": "This is a documentation for the CRUD using Swagger.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Everything about the users"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get the list of all users on the database.",
+        "description": "Get all the users register on the database",
+        "operationId": "userList",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add a new user into the databse",
+        "description": "Add user in the database",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New user data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok, new user has been sucessfuly created"
+          },
+          "400": {
+            "description": "Body received not valid"
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get specific user using his id",
+        "description": "Return specific user by using his id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user's data",
+        "description": "Update user's data with new data received",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New user data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete specific user using his id",
+        "description": "Delete specific user by using his id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "61d59cd7358ac44414c4c8df"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Sam"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Bridges"
+        },
+        "email": {
+          "type": "string",
+          "example": "sam.bridges@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "passwordTest"
+        },
+        "phone": {
+          "type": "string",
+          "example": "07 56 56 32 88"
+        },
+        "creationDate": {
+          "type": "string",
+          "example": "2022-01-05T13:27:51.522Z"
+        },
+        "role": {
+          "type": "string",
+          "example": "Customer"
+        },
+        "_v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    }
+  }
+}
