@@ -11,10 +11,11 @@ router.route('/user')
     userController.createUser
 ])
 
-router.route('/user/:id').get([
+router.route('/user/:id')
+.get([
     userController.getUser
 ])
-.put([
+.patch([
     userController.updateUser
 ])
 .delete([
